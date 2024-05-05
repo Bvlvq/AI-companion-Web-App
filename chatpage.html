@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Create Your Boyfriend</title>
+  <link rel="stylesheet" type="text/css" href="chatpage.css">
+</head>
+
+<body>
+  <header>
+    <a href="home.html" class="logo">My AI Sweetheart</a>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Settings</a>
+        <ul class="dropdown-content">
+          <li><a href="datingsim.html">Dating Sim UI</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Account</a></li>
+    </ul>
+  </header>
+
+  <div class="background">
+    <img src="images/ddlcbg_hq.png" id="bg">
+  </div>
+  <div class="bf-img">
+    <img src="images/aibf_lq_10.png" id="bf">
+  </div>
+
+  <div class="container">
+    <div class="chat-container">
+      <div class="bf-name-bg" id="bf-name-bg">
+        <span>Tyrone</span>
+      </div>
+      <div class="bf-name" id="bf-name">
+        <span>Tyrone</span>
+      </div>
+      <div class="chatbox" id="chatbox">
+        <li class="chat-incoming">
+          <!-- Messages will be appended here -->
+        </li>
+      </div>
+    </div>
+    <div class="input-container">
+      <textarea placeholder="Talk to your boyfriend..." spellcheck="false" required></textarea>
+      <span id="send-btn" class="material-symbols-rounded">></span>
+    </div>
+  </div>
+</body>
+<script type="module" src="bfCreator.js"></script>
+<script type="module" src="chatScript.js"></script>
+
+</html>
+
+
