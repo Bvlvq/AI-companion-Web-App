@@ -22,7 +22,31 @@ bfImage.src = bfImageNew;
 
 
 
+const transition_el_1 = document.querySelector('.transition-1');
+const transition_el_2 = document.querySelector('.transition-2');
 
+window.onload = () => {
+    setTimeout(() => {
+        transition_el_1.classList.replace('is-active', 'leave');
+    })
+}
+
+
+let logo = document.getElementById('logo');
+let home = document.getElementById('home');
+
+const handleTransition = (e) => {
+    e.preventDefault();
+
+    transition_el_2.classList.add('is-active');
+
+    setTimeout(() => {
+        window.location.href = `home.html`;
+    }, 500);
+};
+
+logo.addEventListener('click', handleTransition);
+home.addEventListener('click', handleTransition);
 
 
 
@@ -44,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const fetchChatDataForBot = (botId) => {
         const data = localStorage.getItem("chatData");
         const chatData = data ? JSON.parse(data) : null;
+        console.log(chatData);
         return chatData && chatData[botId] ? chatData[botId] : null;
     };
 
@@ -122,57 +147,64 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     let userMessage = null; // Variable to store user's message
-    const API_KEY = "ASK BRANDON FOR API KEY";
+    const API_KEY = "LMAOOOOOOOOOOO U DONT HAVE THE API KEY";
     const inputInitHeight = chatInput.scrollHeight;
 
-    const generateResponse = (userMessage) => {
-        const API_URL = "https://api.openai.com/v1/chat/completions";
+        // Replace with your actual API Gateway endpoint URL
+const API_GATEWAY_URL = 'https://znx1pasuye.execute-api.us-west-2.amazonaws.com/dev/chat';
 
-        // Define the properties and message for the API request
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "gpt-4-1106-preview",
-                //model: "gpt-3.5-turbo",
-                messages: [{role: "system", content: "Roleplay as my boyfriend. Your name is " + bfName + ". The user's name is Brandon. Your personalities are " 
-                + personalities + ". The ways you talk to the user are " + talk + ". The users hobbies are " + hobbies + ". Make conversations around their hobbies. "
-                + "The emotional supprt you give is " + emotion + ". Respond with at most 2 sentences."},
-                {role: "assistant", content: conversationMemory.join('')},
-                {role: "user", content: userMessage}],
-            })
-        }
+const generateResponse = (userMessage) => {
+    // Define the properties and message for the API request
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            model: 'gpt-4',
+            messages: [
+                {
+                    role: 'system',
+                    content: `Roleplay as my boyfriend. Your name is ${bfName}. The user's name is Brandon. Your personalities are ${personalities}. The ways you talk to the user are ${talk}. The user's hobbies are ${hobbies}. Make conversations around their hobbies. The emotional support you give is ${emotion}. Respond with at most 2 sentences.`
+                },
+                {
+                    role: 'assistant',
+                    content: conversationMemory.join('')
+                },
+                {
+                    role: 'user',
+                    content: userMessage
+                }
+            ]
+        })
+    };
 
-        // Send POST request to API, get response and append the response to the chatbox
-        fetch(API_URL, requestOptions)
+    // Send POST request to API Gateway, get response, and append the response to the chatbox
+    fetch(API_GATEWAY_URL, requestOptions)
         .then(res => res.json())
         .then(data => {
             const botResponse = data.choices[0].message.content.trim();
-            addToConversation(botId, botResponse, "assistant");
+            addToConversation(botId, botResponse, 'assistant');
 
             conversationMemory.push(userMessage, botResponse);
-            
 
             if (conversationMemory.length > 2 * MAX_MEMORY_SIZE) {
                 conversationMemory.splice(0, conversationMemory.length - 2 * MAX_MEMORY_SIZE);
             }
-            console.log("NEW: " + conversationMemory);
+            console.log('NEW: ' + conversationMemory);
 
             // Clear existing messages in the chat container
-            chatbox.innerHTML = "";
+            chatbox.innerHTML = '';
 
             // Create a <p> element to hold the incoming message
-            const chatLi = document.createElement("li");
-            chatLi.classList.add("chat", "incoming");
-            const chatParagraph = document.createElement("p");
+            const chatLi = document.createElement('li');
+            chatLi.classList.add('chat', 'incoming');
+            const chatParagraph = document.createElement('p');
             chatLi.appendChild(chatParagraph);
             chatbox.appendChild(chatLi);
 
             // Split the message into individual characters
-            const characters = data.choices[0].message.content.trim().split('');
+            const characters = botResponse.split('');
             let i = 0;
 
             // Create a function to append characters one by one with a delay
@@ -183,18 +215,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     i++;
                     setTimeout(textSpeed, 10); // Adjust the delay between characters (in milliseconds)
                 }
-            }
+            };
 
             // Start the typewriter effect
             textSpeed();
         })
         .catch(() => {
-            const errorMessage = "[Connection Issue] Womp Womp... Your boyfriend is having problems :(";
-            const chatLi = createChatLi(errorMessage, "error");
+            const errorMessage = '[Connection Issue] Womp Womp... Your boyfriend is having problems :(';
+            const chatLi = createChatLi(errorMessage, 'error');
             chatbox.appendChild(chatLi);
             chatbox.scrollTo(0, chatbox.scrollHeight);
         });
-    }
+};
+
 
 
 
@@ -271,14 +304,18 @@ document.addEventListener("DOMContentLoaded", function() {
         conversations: []
     };
 
-    // Assuming you have access to the current bot ID in your JavaScript code
-    const currentBotId = botId; // Replace this with your actual current bot ID
 
-    // Find the link element for the Text Messaging UI
-    const textMessagingLink = document.querySelector('.dropdown-content a[href="chatpage.html"]');
+    let toText = document.getElementById('toText');
 
-    // Update the href attribute of the link to include the current bot ID
-    textMessagingLink.setAttribute('href', `chatpage.html?id=${currentBotId}`);
+    toText.addEventListener('click', e => {
+        e.preventDefault();
+    
+        transition_el_2.classList.add('is-active');
+    
+        setTimeout(() => {
+            window.location.href = `chatpage.html?id=${botId}`;
+        }, 500);
+    })
 
      // If there are messages, remove the animation class from the elements
      if (chatData[botId].conversations.length == 0) {
