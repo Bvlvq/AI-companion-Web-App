@@ -1,4 +1,13 @@
-My AI Sweetheart Web App (Boyfriend Edition)
+# My AI Sweetheart Web App (Boyfriend Edition)
+
+-------------------------------------------------------
+
+
+AI Boyfriend Documentation
+
+[Click here to view the full documentation](./AI-companion-Web-App/CS4800_AI_Boyfriend_Documentation.pdf)
+
+
 -------------------------------------------------------
 
 Lead PM: Brandon Leho
