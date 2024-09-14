@@ -5,7 +5,7 @@
 
 AI Boyfriend Documentation
 
-[Click here to view the full documentation](./CS4800_AI_Boyfriend_Documentation.pdf)
+[Click here to view the full documentation](./CS4800_AI_Boyfriend_Documentation_(1).pdf)
 
 
 -------------------------------------------------------
